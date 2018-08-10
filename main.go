@@ -83,6 +83,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	// Check for #ask-zucc event
 	if m.ChannelID == "468402235412578314" && (strings.Contains(m.Message.Content, "Zuckerbot") || strings.Contains(m.Message.Content, "zuckerbot")) {
+		fmt.Println("QUESTION RECEIVED MORTAL")
 		s.ChannelMessageSend(m.ChannelID, generate())
 		return
 	}
@@ -94,18 +95,19 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	for _, v := range line {
 		data = append(data, strings.Split(v, " ")...)
 	}
+	fmt.Println(data)
 
 	getWord := func(str string) *node {
-		for _, v := range markov {
-			if v.word == str {
-				return &v
+		for i := range markov {
+			if markov[i].word == str {
+				return &markov[i]
 			}
 		}
 
 		markov = append(markov, node{str, make([]*node, 0)})
-		for _, v := range markov {
-			if v.word == str {
-				return &v
+		for i := range markov {
+			if markov[i].word == str {
+				return &markov[i]
 			}
 		}
 
