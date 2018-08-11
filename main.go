@@ -114,12 +114,14 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		panic("If you are reading this message, the world is ending")
 	}
 
+	// Interpret the data
 	getWord("FRONT").addLink(getWord(data[0]))
 	for i := range data[:len(data)-1] {
 		getWord(data[i]).addLink(getWord(data[i+1]))
 	}
 	getWord(data[len(data)-1]).addLink(getWord("BACK"))
 
+	// Randomly decide if Zuckerbot should speak
 	if rand.Intn(4) == 4 {
 		s.ChannelMessageSend(m.ChannelID, generate())
 	}
