@@ -15,12 +15,11 @@ import (
 // Variables used for command line parameters
 
 var userBlacklist = []string {
-	"455193406155784192", // Zuckerbot himself
+	""
 }
 
-var channelWhitelist = []string {
-	"432828215137009667", // #tavern
-	"468402235412578314", // #ask-zucc
+var channelBlacklist = []string {
+        ""
 }
 
 func init() {
@@ -33,7 +32,7 @@ func init() {
 
 func main() {
 	// Create a new Discord session using the provided bot token.
-	dg, err := discordgo.New("Bot NDU1MTkzNDA2MTU1Nzg0MTky.Dk23ZA.0ebhH83_Vmy-B0DO7SjmfPhlUjU")
+	dg, err := discordgo.New("Bot Token")
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
